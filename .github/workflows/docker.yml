@@ -37,11 +37,11 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: |
-        kubectl set image deployment/smartdeploy-app app=${{ secrets.DOCKER_USERNAME }}/safedeploy-app:v1
+        kubectl set image deployment/smartdeploy-app app=${{ secrets.DOCKER_USERNAME }}/safedeploy-app
 
     - name: Verify rollout
       run: |
-        kubectl rollout status deployment/safedeploy-app:v1
+        kubectl rollout status deployment/safedeploy-app
 
     - name: Health Check
       run: |
