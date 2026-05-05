@@ -23,3 +23,21 @@ jobs:
 
     - name: Push Docker Image
       run: docker push ${{ secrets.DOCKER_USERNAME }}/safedeploy-app:v1
+
+    - name: Set up kubeconfig
+      run: |
+       mkdir -p ~/.kube
+       echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+
+    - name: Install kubectl
+      run: |
+       sudo apt-get update
+       sudo apt-get install -y kubectl
+
+    - name: Deploy to Kubernetes
+      run: |
+       kubectl set image deployment/smartdeploy-app app=${{ secrets.DOCKER_USERNAME }}/smartdeploy:latest
+
+    - name: Verify rollout
+      run: |
+       kubectl rollout status deployment/smartdeploy-app
