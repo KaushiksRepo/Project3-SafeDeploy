@@ -46,7 +46,7 @@ jobs:
     - name: Health Check
       run: |
        sleep 10
-       curl -f http://<external-ip> || exit 1
+       curl -f http://4.224.98.56 || exit 1
 
     - name: Rollback if failed
       if: failure()
