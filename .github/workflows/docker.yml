@@ -27,7 +27,7 @@ jobs:
     - name: Set up kubeconfig
       run: |
        mkdir -p ~/.kube
-       echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+       echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 -d > ~/.kube/config
 
     - name: Install kubectl
       run: |
